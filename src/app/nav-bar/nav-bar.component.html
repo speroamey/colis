@@ -1,0 +1,182 @@
+
+
+
+
+<ng-template #templateSignup>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Créer Un Compte</h4>
+        <button type="button" class="close pull-right" 
+                aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm">
+
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+            
+              <input type="email" class="form-control" id="inputEmail" name="email" [(ngModel)]="accountData.email" placeholder="Email"  #email="ngModel"  pattern="[^ @]*@[^ @]*" required  [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched),'is-valid':email.valid && (email.dirty || email.touched)}">
+              <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+                <small class="text-danger" *ngIf="email.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="email.errors.pattern">adresse mail incorrect</small>
+              </div>
+
+            </div>
+
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control has-danger" id="inputUsername" name="username" [(ngModel)]="accountData.username"placeholder="Username"  #username="ngModel"  minlength="4" required  [ngClass]="{'is-invalid': username.invalid && (username.dirty || username.touched),'is-valid':username.valid && (username.dirty || username.touched)}">
+              <div class="form-control-feedback" *ngIf="username.errors && (username.dirty || username.touched)">
+                <small class="text-danger" *ngIf="username.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="username.errors.minlength"> 4 caractères au minimum </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="password" class="form-control" id="inputPassword" name="password" [(ngModel)]="accountData.password" placeholder="Password"  minlength="6" #password="ngModel" required  [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched),'is-valid':password.valid && (password.dirty || password.touched)}">
+              <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                <small class="text-danger" *ngIf="password.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="password.errors.minlength">6 caractères au minimum</small>
+              </div>
+            </div>
+
+
+            <div class="form-group col-md-6">
+            
+              <input type="password" class="form-control" id="inputRepeatPassword" name="repeatPassword" [(ngModel)]="accountData.repeatPassword" placeholder="Repeat Password" minlength="6"  #repeatPassword="ngModel"  minlength="8" required  [ngClass]="{'is-invalid': repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched),'is-valid':repeatPassword.valid && (repeatPassword.dirty || password.touched)}">
+               <div class="form-control-feedback" *ngIf="repeatPassword.errors && (repeatPassword.dirty || repeatPassword.touched)">
+                <small class="text-danger" *ngIf="repeatPassword.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="repeatPassword.errors.minlength">6 caractères au minimum</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+           
+            <input type="text" class="form-control" id="inputAddress" name="address" [(ngModel)]="accountData.address" placeholder="address" #address="ngModel"  minlength="4" required  [ngClass]="{'is-invalid': address.invalid && (address.dirty || address.touched),'is-valid':address.valid && (address.dirty || address.touched)}">
+             <div class="form-control-feedback" *ngIf="address.errors && (address.dirty || address.touched)">
+                <small class="text-danger" *ngIf="address.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="address.errors.minlength">4 caractères au minimum</small>
+              </div>
+          </div>
+           <div class="form-group">
+           
+            <input type="text" class="form-control" id="inputPhone" name="phone" [(ngModel)]="accountData.phone" placeholder="Telephone" #phone="ngModel"  minlength="6" required  [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched),'is-valid':phone.valid && (phone.dirty || phone.touched)}">
+
+             <div class="form-control-feedback" *ngIf="phone.errors && (phone.dirty || phone.touched)">
+                <small class="text-danger" *ngIf="phone.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="phone.errors.minlength">6 caractères au minimum</small>
+              </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+            
+              <input type="text" class="form-control" id="inputCity" name="city" [(ngModel)]="accountData.city" placeholder="City" #city="ngModel"  minlength="3" required  [ngClass]="{'is-invalid': city.invalid && (city.dirty || city.touched),'is-valid':city.valid && (city.dirty || city.touched)}">
+
+             <div class="form-control-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+                <small class="text-danger" *ngIf="city.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="city.errors.minlength">3 caractères au minimum</small>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              
+               <input type="text" class="form-control" id="inputCountry" name="country" [(ngModel)]="accountData.country" placeholder="Country" #country="ngModel"  minlength="3" required  [ngClass]="{'is-invalid': country.invalid && (country.dirty || country.touched),'is-valid':country.valid && (country.dirty || country.touched)}">
+
+             <div class="form-control-feedback" *ngIf="country.errors && (country.dirty || country.touched)">
+                <small class="text-danger" *ngIf="country.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="country.errors.minlength">3 caractères au minimum</small>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+            
+              <input type="text" class="form-control" id="inputZip" name="zipCode" [(ngModel)]="accountData.zipCode" placeholder="BP" #zipCode="ngModel"   required  [ngClass]="{'is-invalid': zipCode.invalid && (zipCode.dirty || zipCode.touched),'is-valid':zipCode.valid && (zipCode.dirty || zipCode.touched)}">
+
+             <div class="form-control-feedback" *ngIf="zipCode.errors && (zipCode.dirty || zipCode.touched)">
+                <small class="text-danger" *ngIf="zipCode.errors.required">Champ requis</small>
+               
+              </div>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-warning float-right" [disabled]="!f.valid" (click)= "saveAccount(templateSignup)">Valider</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #templateLogin>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">S'authentifier</h4>
+        <button type="button" class="close pull-right" 
+                aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm">
+
+           <div class="form-group">
+              <input type="email" class="form-control" id="inputEmail" name="email" [(ngModel)]="accountData.email" placeholder="Email"  #email="ngModel"  pattern="[^ @]*@[^ @]*" required  [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched),'is-valid':email.valid && (email.dirty || email.touched)}">
+              <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+                <small class="text-danger" *ngIf="email.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="email.errors.pattern">adresse mail incorrect</small>
+              </div>
+          </div>
+
+          <div class="form-group">
+           <input type="password" class="form-control" id="inputPassword" name="password" [(ngModel)]="accountData.password" placeholder="Password"  minlength="6" #password="ngModel" required  [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched),'is-valid':password.valid && (password.dirty || password.touched)}">
+              <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                <small class="text-danger" *ngIf="password.errors.required">Champ requis</small>
+                <small class="text-danger" *ngIf="password.errors.minlength">6 caractères au minimum</small>
+              </div>
+          </div>
+          
+          
+          <button type="submit" class="btn btn-warning float-right" (click)= "saveAccount(templateLogin)" [disabled]="!f.valid">Valider</button>
+        </form>
+    </div>
+</ng-template>
+
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-warning mb-5">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <button class="btn btn-success navbar-brand" href="#"> Mowondoo</button> 
+ 
+  
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active"> Destinations <span class="sr-only"></span></a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/pages/souscriptions" routerLinkActive="active">Mes Souscriptions</a>
+      </li>
+      
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle class="nav-link dropdown-toggle" routerLinkActive="active" role="button">
+          Mon Compte
+        </a>
+        <div *dropdownMenu class="dropdown-menu">
+          <a class="dropdown-item" (click)="openModal(templateSignup)">Créer un compte</a>
+          <a class="dropdown-item" (click)="openModal(templateLogin)">Se connecter</a>
+          
+        </div>
+      </li>
+    </ul>
+  </div>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+
+

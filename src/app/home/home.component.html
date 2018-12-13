@@ -1,0 +1,149 @@
+
+
+<div class="container">
+
+<ng-template #templateAdd>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Souscription</h4>
+        <button type="button" class="close pull-right" 
+                aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+   
+    <div *ngIf="!data.id">
+    	 <div class="modal-body" >
+	        <form #f="ngForm" >
+
+	           <div class="form-group">
+	           	  <label> Kilos  disponibles</label>
+	              <input type="number" class="form-control" id="inputKilos" name="nbkilos" min="2" disabled placeholder="{{data.nbr_kilos}} Kilos" >
+	                          
+	           </div>
+
+	           <div class="form-group">
+	           	  <label> Nbr de Kilos à réserver </label>
+	              <input type="number" class="form-control" id="inputKilos" name="kilos" value="2" min="2" max="20" [(ngModel)]="souscriptionData.kilos" placeholder="Kilos"  #kilos="ngModel" required  [ngClass]="{'is-invalid': kilos.invalid && (kilos.dirty || kilos.touched),'is-valid':kilos.valid && (kilos.dirty || kilos.touched)}">
+	              <div class="form-control-feedback" *ngIf="kilos.errors && (kilos.dirty || kilos.touched)">
+	                <small class="text-danger" *ngIf="kilos.errors.required">Champ Obligatoire</small>
+	                <small class="text-danger" *ngIf="kilos.errors.max">Nombre incorrect</small>
+	                <small class="text-danger" *ngIf="kilos.errors.min">Nombre incorrect</small>
+	              </div>
+	           </div>
+	        </form>
+    	 </div>
+	     <div class="modal-footer">
+	    	<button type="button" class="btn btn-default pull-right" (click)="modalRef.hide()">Annuler</button>
+	    	<button type="button" class="btn btn-success pull-right" [disabled]="!f.valid">{{btnValue}}</button>
+	    </div>
+    </div>
+
+
+    <div *ngIf="data.id">
+    	 <div class="modal-body" >
+	        <form #f="ngForm" >
+
+	           <div class="form-group">
+	           	  <label> Kilos  disponibles</label>
+	              <input type="number" class="form-control" id="inputKilos" name="nbkilos" min="2" disabled placeholder="{{data.nbr_kilos}} Kilos" >
+	                          
+	           </div>
+
+	           <div class="form-group">
+	           	  <label> Nbr de Kilos à réserver </label>
+	              <input type="number" class="form-control" id="inputKilos" name="kilos" value="2" min="2" max="20" [(ngModel)]="souscriptionData.kilos" placeholder="Kilos"  #kilos="ngModel" required  [ngClass]="{'is-invalid': kilos.invalid && (kilos.dirty || kilos.touched),'is-valid':kilos.valid && (kilos.dirty || kilos.touched)}">
+	              <div class="form-control-feedback" *ngIf="kilos.errors && (kilos.dirty || kilos.touched)">
+
+	                <small class="text-danger" *ngIf="kilos.errors.required">Champ Obligatoire</small>
+	                <small class="text-danger" *ngIf="kilos.errors.max">Nombre incorrect</small>
+	                <small class="text-danger" *ngIf="kilos.errors.min">Nombre incorrect</small>
+	              </div>
+	           </div>
+	        </form>
+    	 </div>
+	     <div class="modal-footer">
+	    	<button type="button" class="btn btn-default pull-right" (click)="modalRef.hide()">Annuler</button>
+	    	<button type="button" class="btn btn-success pull-right" [disabled]="!f.valid">{{btnValue}}</button>
+	    </div>
+    </div>
+</ng-template>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Suppression</h4>
+        <button type="button" class="close pull-right" 
+                aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div> Voulez-vous vraiment supprimer cette souscription ?</div>
+    </div>
+    <div class="modal-footer">
+    	<button type="button" class="btn btn-default pull-right" (click)="modalRef.hide()">Annuler</button>
+    	<button type="button" class="btn btn-danger pull-right">Confirmer</button>
+    </div>
+</ng-template>
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+	<div class="mt-5">
+		
+	</div>
+	<table class="table table-bordered table-striped table-hover mt-5" style="margin-top:90px !important">
+
+		<thead class="thead-warning">
+			<tr>
+				<th colspan="5">
+					Liste des envois possibles
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Num
+				</th>
+				<th>
+					Adresse
+				</th>
+				<th>
+					Destination
+				</th>
+				<th>
+					Nbr de Kilos
+				</th>
+				<th>
+					Date & Heure de cloture
+				</th>
+				<th>
+					Actions
+				</th>
+			</tr>
+		</thead>
+			
+		<tbody>
+			<tr *ngFor="let item of datas; let index=index">
+				<td>{{index+1}}</td>
+				<td>{{item.address}}</td>
+				<td>{{item.destination}}</td>
+				<td>{{item.nbr_kilos}}</td>
+				<td>{{item.date_depart}}</td>
+				<td>
+					<fa-icon icon="cart-plus" class="text-success" size="" style="margin-right:30px"  tooltip="Souscrire" (click)="openModal(templateAdd,item,'Ajouter')"></fa-icon>
+					<fa-icon icon="edit" class="text-success" size="" style="margin-right:30px" tooltip="Modifier la souscription(s)" (click)="openModal(templateAdd,item,'Modifier')"></fa-icon>
+					<fa-icon icon="eject" class="text-danger" size="" tooltip="Annuler la souscription" (click)="deleteSubscription(template,item)"></fa-icon>
+					
+					 <!-- simple name only that assumes the 'fas' prefix -->
+					
+				 
+					 <!-- ['fas', 'coffee'] is an array that indicates the [prefix, iconName] -->
+ 
+				</td>
+			</tr>
+			
+		
+		</tbody>
+	</table>
+</div>
